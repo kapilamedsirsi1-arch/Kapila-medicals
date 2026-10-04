@@ -1,0 +1,29 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "orders",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "partyId", "order": "ASCENDING" },
+        { "fieldPath": "orderDate", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "payments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "partyId", "order": "ASCENDING" },
+        { "fieldPath": "date", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "visits",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "staffId", "order": "ASCENDING" },
+        { "fieldPath": "date", "order": "DESCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

@@ -1,0 +1,169 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User account for authentication and role-based access control",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 100 },
+        "mobile": { "type": "string", "maxLength": 20 },
+        "email": { "type": "string", "maxLength": 100 },
+        "role": { "type": "string", "enum": ["super_admin", "admin", "accounts", "manager", "staff", "party", "company_rep"] },
+        "status": { "type": "string", "enum": ["active", "inactive", "pending"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "mobile", "role", "status"]
+    },
+    "Staff": {
+      "title": "Staff",
+      "description": "Staff profile details including KYC and assigned area",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "employeeCode": { "type": "string", "maxLength": 50 },
+        "fullName": { "type": "string", "maxLength": 100 },
+        "mobile": { "type": "string", "maxLength": 20 },
+        "assignedArea": { "type": "string", "maxLength": 200 },
+        "status": { "type": "string", "enum": ["pending_approval", "approved", "rejected"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "employeeCode", "fullName", "mobile", "status"]
+    },
+    "Party": {
+      "title": "Party",
+      "description": "Retail medical shop, hospital, or institutional pharmacy customer",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 150 },
+        "customerCode": { "type": "string", "maxLength": 50 },
+        "contactPerson": { "type": "string", "maxLength": 100 },
+        "mobile": { "type": "string", "maxLength": 20 },
+        "address": { "type": "string", "maxLength": 300 },
+        "area": { "type": "string", "maxLength": 100 },
+        "city": { "type": "string", "maxLength": 100 },
+        "gstin": { "type": "string", "maxLength": 25 },
+        "drugLicence": { "type": "string", "maxLength": 100 },
+        "currentOutstanding": { "type": "number" },
+        "creditLimit": { "type": "number" },
+        "creditDays": { "type": "number" },
+        "customerType": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "inactive", "pending_approval"] }
+      },
+      "required": ["id", "name", "customerCode", "contactPerson", "mobile", "address", "city", "status"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Pharmaceutical medicine item or formulation",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 150 },
+        "companyName": { "type": "string", "maxLength": 100 },
+        "companyId": { "type": "string" },
+        "division": { "type": "string", "maxLength": 100 },
+        "salt": { "type": "string", "maxLength": 200 },
+        "packSize": { "type": "string", "maxLength": 50 },
+        "mrp": { "type": "number" },
+        "ptr": { "type": "number" },
+        "pts": { "type": "number" },
+        "gstRate": { "type": "number" },
+        "scheme": { "type": "string", "maxLength": 50 },
+        "stock": { "type": "number" },
+        "reorderLevel": { "type": "number" },
+        "productCode": { "type": "string", "maxLength": 50 },
+        "status": { "type": "string", "enum": ["active", "discontinued"] }
+      },
+      "required": ["id", "name", "companyName", "companyId", "packSize", "mrp", "ptr", "gstRate", "stock", "status"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Wholesale medicine sales booking order",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "orderNumber": { "type": "string", "maxLength": 50 },
+        "date": { "type": "string", "maxLength": 20 },
+        "time": { "type": "string", "maxLength": 20 },
+        "staffId": { "type": "string" },
+        "staffName": { "type": "string", "maxLength": 100 },
+        "partyId": { "type": "string" },
+        "partyName": { "type": "string", "maxLength": 150 },
+        "basicTotal": { "type": "number" },
+        "gstTotal": { "type": "number" },
+        "grandTotal": { "type": "number" },
+        "status": { "type": "string" },
+        "remarks": { "type": "string", "maxLength": 500 }
+      },
+      "required": ["id", "orderNumber", "date", "partyId", "partyName", "basicTotal", "gstTotal", "grandTotal", "status"]
+    },
+    "Payment": {
+      "title": "Payment",
+      "description": "Payment collection receipt from customer party",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "receiptNumber": { "type": "string", "maxLength": 50 },
+        "date": { "type": "string", "maxLength": 20 },
+        "partyId": { "type": "string" },
+        "partyName": { "type": "string", "maxLength": 150 },
+        "amount": { "type": "number" },
+        "mode": { "type": "string", "enum": ["CASH", "CHEQUE", "UPI", "BANK_TRANSFER"] },
+        "outstandingBefore": { "type": "number" },
+        "outstandingAfter": { "type": "number" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "receiptNumber", "date", "partyId", "partyName", "amount", "mode", "status"]
+    },
+    "Expense": {
+      "title": "Expense",
+      "description": "Staff travel and operational expense claim",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "staffId": { "type": "string" },
+        "staffName": { "type": "string", "maxLength": 100 },
+        "date": { "type": "string", "maxLength": 20 },
+        "category": { "type": "string", "maxLength": 50 },
+        "amount": { "type": "number" },
+        "location": { "type": "string", "maxLength": 150 },
+        "description": { "type": "string", "maxLength": 300 },
+        "paymentMode": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "staffId", "staffName", "date", "category", "amount", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profiles and role assignments"
+    },
+    "/staff/{staffId}": {
+      "schema": { "$ref": "#/entities/Staff" },
+      "description": "Field force and staff directory"
+    },
+    "/parties/{partyId}": {
+      "schema": { "$ref": "#/entities/Party" },
+      "description": "Chemist and hospital accounts directory"
+    },
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/Product" },
+      "description": "Pharmaceutical product pricing and inventory master"
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "Sales bookings and dispatch pipeline"
+    },
+    "/payments/{paymentId}": {
+      "schema": { "$ref": "#/entities/Payment" },
+      "description": "Payment collections, cash, and cheque ledger"
+    },
+    "/expenses/{expenseId}": {
+      "schema": { "$ref": "#/entities/Expense" },
+      "description": "Field tour boy expense claims"
+    }
+  }
+}

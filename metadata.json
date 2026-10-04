@@ -1,0 +1,11 @@
+{
+  "name": "Kapila Medical Agencies - ERP & Field Force Platform",
+  "description": "Comprehensive Pharmaceutical Distribution ERP, Field Force Automation, Order Booking, Collection, AI Bill OCR, and Party Management for M/s. Kapila Medical Agencies, Sirsi.",
+  "requestFramePermissions": [
+    "geolocation",
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
